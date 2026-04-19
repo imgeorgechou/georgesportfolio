@@ -1,6 +1,14 @@
+import { Link, useLocation } from 'react-router-dom'
+
 const dots = ['#1A73E8', '#EA4335', '#F9AB00', '#1E8E3E']
 
 export default function Footer() {
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+  const AnchorTag = isHome ? 'a' : Link
+  const toOrHref = (hash) =>
+    isHome ? { href: `#${hash}` } : { to: `/#${hash}` }
+
   return (
     <footer className="border-t border-rule bg-paper">
       {/* Marquee ribbon */}
@@ -35,10 +43,10 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft">
-          <a href="#home" className="hover:text-ink transition-colors cursor-pointer">首頁</a>
-          <a href="#about" className="hover:text-ink transition-colors cursor-pointer">關於我</a>
-          <a href="#portfolio" className="hover:text-ink transition-colors cursor-pointer">作品集</a>
-          <a href="#contact" className="hover:text-ink transition-colors cursor-pointer">聯絡我</a>
+          <AnchorTag {...toOrHref('home')} className="hover:text-ink transition-colors cursor-pointer">首頁</AnchorTag>
+          <AnchorTag {...toOrHref('about')} className="hover:text-ink transition-colors cursor-pointer">關於我</AnchorTag>
+          <AnchorTag {...toOrHref('portfolio')} className="hover:text-ink transition-colors cursor-pointer">作品集</AnchorTag>
+          <AnchorTag {...toOrHref('contact')} className="hover:text-ink transition-colors cursor-pointer">聯絡我</AnchorTag>
         </div>
 
         <p className="marker-num">

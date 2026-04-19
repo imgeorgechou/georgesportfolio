@@ -1,21 +1,19 @@
-import Nav from './components/Nav'
-import Hero from './components/Hero'
-import About from './components/About'
-import Portfolio from './components/Portfolio'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import Home from './pages/Home'
+import ProjectDetail from './pages/ProjectDetail'
+import ScrollManager from './components/ScrollManager'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-paper text-ink grain-overlay">
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Portfolio />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <ScrollManager />
+      <div className="min-h-screen bg-paper text-ink grain-overlay">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }

@@ -1,7 +1,10 @@
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, Target, TrendingUp, Star } from 'lucide-react'
 import { categories, projects } from '../data/projects'
+
+const MotionLink = motion(Link)
 
 const viewport = { once: true, margin: '-80px' }
 
@@ -111,7 +114,8 @@ export default function Portfolio() {
 
 function ProjectCard({ p, index }) {
   return (
-    <motion.article
+    <MotionLink
+      to={`/project/${p.id}`}
       layout
       initial={{ opacity: 0, y: 24, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -122,7 +126,7 @@ function ProjectCard({ p, index }) {
         ease: [0.22, 1, 0.36, 1],
         layout: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
       }}
-      className={`group relative flex flex-col rounded-2xl bg-paper border border-rule hover:border-ink/80 transition-colors duration-300 overflow-hidden ${
+      className={`group relative flex flex-col rounded-2xl bg-paper border border-rule hover:border-ink/80 transition-colors duration-300 overflow-hidden cursor-pointer ${
         p.featured ? 'xl:col-span-2' : ''
       }`}
     >
@@ -203,6 +207,6 @@ function ProjectCard({ p, index }) {
           ))}
         </div>
       </div>
-    </motion.article>
+    </MotionLink>
   )
 }

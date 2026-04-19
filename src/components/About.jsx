@@ -29,16 +29,18 @@ const skills = [
     zh: '硬實力',
     color: 'g-yellow',
     items: [
-      { tag: 'Python' },
-      { tag: 'SQL' },
-      { tag: 'React' },
-      { tag: 'Excel' },
-      { tag: 'M365Copilot' },
-      { tag: 'Tableau' },
-      { tag: 'Figma' },
-      { tag: 'Canvas' },
-      { tag: 'GoogleAppsScript' },
-      { tag: 'n8n' },
+      { tag: 'Python', icon: 'https://cdn.simpleicons.org/python' },
+      { tag: 'SQL', icon: 'https://cdn.simpleicons.org/mysql' },
+      { tag: 'React', icon: 'https://cdn.simpleicons.org/react' },
+      { tag: 'Excel', icon: '/logos/excel.svg' },
+      { tag: 'M365Copilot', icon: '/logos/m365copilot.svg' },
+      { tag: 'GPTEnterprise', icon: '/logos/gpt.svg' },
+      { tag: 'ClaudeCode', icon: 'https://cdn.simpleicons.org/claude' },
+      { tag: 'Tableau', icon: '/logos/tableau.svg' },
+      { tag: 'Figma', icon: 'https://cdn.simpleicons.org/figma' },
+      { tag: 'Canva', icon: '/logos/canva.svg' },
+      { tag: 'GoogleAppsScript', icon: 'https://cdn.simpleicons.org/googleappsscript' },
+      { tag: 'n8n', icon: 'https://cdn.simpleicons.org/n8n' },
     ],
   },
   {
@@ -215,7 +217,7 @@ export default function About() {
                   </div>
                 </div>
                 <div className="col-span-12 lg:col-span-9 flex flex-wrap gap-2">
-                  {group.items.map(({ tag, note }, idx) => (
+                  {group.items.map(({ tag, note, icon }, idx) => (
                     <motion.span
                       key={tag}
                       initial={{ opacity: 0, y: 6 }}
@@ -224,7 +226,17 @@ export default function About() {
                       transition={{ duration: 0.35, delay: i * 0.08 + idx * 0.03 }}
                       className={`group/tag inline-flex items-center gap-1.5 text-sm font-mono px-3 py-1.5 rounded-full bg-paper border border-rule text-ink-soft hover:border-${group.color} hover:text-${group.color} hover:bg-${group.color}/10 hover:-translate-y-0.5 transition-all duration-300 cursor-default`}
                     >
-                      <span className={`text-${group.color} font-semibold`}>#</span>
+                      {icon ? (
+                        <img
+                          src={icon}
+                          alt=""
+                          aria-hidden
+                          loading="lazy"
+                          className="w-3.5 h-3.5 object-contain"
+                        />
+                      ) : (
+                        <span className={`text-${group.color} font-semibold`}>#</span>
+                      )}
                       <span>{tag}</span>
                       {note && (
                         <span className="text-ink-mute group-hover/tag:text-ink-soft transition-colors">

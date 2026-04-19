@@ -1,3 +1,14 @@
+// Project schema — required fields: id, title, role, cat, accent, year, tag, problem, impact[], stack[]
+// Optional detail-page fields (fill later):
+//   cover      — hero image path
+//   summary    — 1–2 sentence tagline under the hero title
+//   background — longer problem context paragraph
+//   approach   — array of { title, body } describing solution steps
+//   outcome    — closing paragraph (reflection / lessons learned)
+//   gallery    — array of { src, caption }
+//   links      — array of { label, href }
+//   sections   — array of { heading, body } for freeform extra content
+
 export const categories = [
   { id: "all", label: "全部", count: 0, color: "ink" },
   { id: "ai", label: "AI 應用", color: "g-blue" },
