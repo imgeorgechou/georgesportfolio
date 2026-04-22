@@ -1,40 +1,40 @@
-import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, Phone, ArrowUpRight } from 'lucide-react'
+import { motion } from "framer-motion";
+import { Mail, Github, Linkedin, Phone, ArrowUpRight } from "lucide-react";
 
 const channels = [
   {
-    label: 'Email',
-    value: 'onion0208@gmail.com',
-    href: 'mailto:onion0208@gmail.com',
+    label: "Email",
+    value: "onion0208@gmail.com",
+    href: "mailto:onion0208@gmail.com",
     icon: Mail,
-    color: 'g-red',
-    prefix: '寫信',
+    color: "g-red",
+    prefix: "寫信",
   },
   {
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/zhi-siang-zhou',
-    href: 'https://www.linkedin.com/',
+    label: "LinkedIn",
+    value: "linkedin.com/in/zhi-siang-zhou",
+    href: "www.linkedin.com/in/zhi-siang-zhou",
     icon: Linkedin,
-    color: 'g-blue',
-    prefix: '專業履歷',
+    color: "g-blue",
+    prefix: "專業履歷",
   },
   {
-    label: 'GitHub',
-    value: 'github.com/onion0208',
-    href: 'https://github.com/',
+    label: "GitHub",
+    value: "github.com/onion0208",
+    href: "https://github.com/imgeorgechou",
     icon: Github,
-    color: 'ink',
-    prefix: '開源程式碼',
+    color: "ink",
+    prefix: "開源程式碼",
   },
   {
-    label: 'Phone',
-    value: '+886 956 858 488',
-    href: 'tel:+886956858488',
+    label: "Phone",
+    value: "+886 956 858 488",
+    href: "tel:+886956858488",
     icon: Phone,
-    color: 'g-green',
-    prefix: '語音通話',
+    color: "g-green",
+    prefix: "語音通話",
   },
-]
+];
 
 export default function Contact() {
   return (
@@ -50,12 +50,15 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="col-span-12 lg:col-span-7"
           >
             <h2 className="font-serif font-black text-5xl lg:text-[88px] leading-[0.98] tracking-tightest text-balance">
-              一起把 <span className="font-display italic font-semibold text-g-blue">想法</span>
+              一起把{" "}
+              <span className="font-display italic font-semibold text-g-blue">
+                想法
+              </span>
               <br />
               <span className="relative inline-block">
                 <span className="relative z-10">落地</span>
@@ -90,8 +93,12 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{
+              duration: 0.8,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="col-span-12 lg:col-span-5"
           >
             <div className="rounded-3xl border border-rule bg-paper-warm/40 p-6 lg:p-8">
@@ -104,15 +111,22 @@ export default function Contact() {
                   <li key={c.label}>
                     <a
                       href={c.href}
-                      target={c.href.startsWith('http') ? '_blank' : undefined}
+                      target={c.href.startsWith("http") ? "_blank" : undefined}
                       rel="noopener noreferrer"
                       className="group flex items-center gap-4 py-4 cursor-pointer"
                     >
-                      <span className={`w-10 h-10 rounded-xl flex items-center justify-center bg-${c.color}/10 group-hover:bg-${c.color} group-hover:text-paper transition-colors duration-300`}>
-                        <c.icon className={`w-[18px] h-[18px] text-${c.color} group-hover:text-paper transition-colors duration-300`} strokeWidth={2} />
+                      <span
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center bg-${c.color}/10 group-hover:bg-${c.color} group-hover:text-paper transition-colors duration-300`}
+                      >
+                        <c.icon
+                          className={`w-[18px] h-[18px] text-${c.color} group-hover:text-paper transition-colors duration-300`}
+                          strokeWidth={2}
+                        />
                       </span>
                       <div className="flex-1 min-w-0">
-                        <p className="marker-num">{c.prefix} · {c.label}</p>
+                        <p className="marker-num">
+                          {c.prefix} · {c.label}
+                        </p>
                         <p className="text-sm text-ink truncate">{c.value}</p>
                       </div>
                       <ArrowUpRight
@@ -131,12 +145,13 @@ export default function Contact() {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-g-green" />
               </span>
               <p className="text-sm text-ink-soft">
-                目前開放 <b className="text-ink">實習 / 產品助理</b> 與 <b className="text-ink">研究合作</b> 洽談。
+                目前開放 <b className="text-ink">實習 / 產品助理</b> 與{" "}
+                <b className="text-ink">研究合作</b> 洽談。
               </p>
             </div>
           </motion.div>
         </div>
       </div>
     </section>
-  )
+  );
 }
