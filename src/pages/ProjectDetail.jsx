@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { projects, categories } from '../data/projects'
 import Nav from '../components/Nav'
+import TopMarquee from '../components/TopMarquee'
 import Footer from '../components/Footer'
 
 const fadeUp = {
@@ -45,16 +46,17 @@ export default function ProjectDetail() {
 
   return (
     <>
+      <TopMarquee />
       <Nav />
-      <main className="pt-28 lg:pt-32">
+      <main className="pt-8 sm:pt-10 lg:pt-14 overflow-x-hidden">
         {/* Breadcrumb */}
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-12">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="show"
             custom={0}
-            className="flex items-center gap-3 text-sm"
+            className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm"
           >
             <Link
               to="/#portfolio"
@@ -71,8 +73,8 @@ export default function ProjectDetail() {
         </div>
 
         {/* Hero */}
-        <section className="mx-auto max-w-[1400px] px-6 lg:px-12 pt-10 lg:pt-14 pb-10 lg:pb-14">
-          <div className="grid grid-cols-12 gap-8 lg:gap-12 items-end">
+        <section className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-12 pt-8 sm:pt-10 lg:pt-14 pb-10 lg:pb-14">
+          <div className="grid grid-cols-12 gap-8 lg:gap-12 lg:items-end">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -88,11 +90,11 @@ export default function ProjectDetail() {
                 </span>
                 <span className="marker-num">{p.role}</span>
               </div>
-              <h1 className="font-serif font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tightest text-balance">
+              <h1 className="font-serif font-black text-[2rem] leading-[1.1] sm:text-5xl sm:leading-[1.05] lg:text-6xl tracking-tightest text-balance break-words">
                 {p.title}
               </h1>
               {p.summary && (
-                <p className="mt-6 text-lg lg:text-xl text-ink-soft leading-relaxed text-pretty max-w-2xl">
+                <p className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-ink-soft leading-relaxed text-pretty max-w-2xl">
                   {p.summary}
                 </p>
               )}
@@ -105,7 +107,7 @@ export default function ProjectDetail() {
               custom={2}
               className="col-span-12 lg:col-span-4"
             >
-              <div className="rounded-2xl border border-rule bg-paper p-6 lg:p-7">
+              <div className="rounded-2xl border border-rule bg-paper p-5 sm:p-6 lg:p-7">
                 <MetaRow label="年份" value={p.year} />
                 <MetaRow label="類別" value={catLabel} />
                 <MetaRow label="角色" value={p.role} />
@@ -146,7 +148,7 @@ export default function ProjectDetail() {
             initial="hidden"
             animate="show"
             custom={3}
-            className="mx-auto max-w-[1400px] px-6 lg:px-12"
+            className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-12"
           >
             <div className="relative w-full aspect-[16/9] overflow-hidden rounded-2xl border border-rule bg-paper-warm">
               <img
@@ -160,10 +162,10 @@ export default function ProjectDetail() {
         )}
 
         {/* Body */}
-        <section className="mx-auto max-w-[1400px] px-6 lg:px-12 py-16 lg:py-24">
+        <section className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-12 py-14 sm:py-16 lg:py-24">
           <div className="grid grid-cols-12 gap-10 lg:gap-16">
             {/* Left: narrative */}
-            <div className="col-span-12 lg:col-span-8 flex flex-col gap-14 lg:gap-20">
+            <div className="col-span-12 lg:col-span-8 flex flex-col gap-12 sm:gap-14 lg:gap-20">
               {/* Problem */}
               <Block
                 accent={p.accent}
@@ -189,11 +191,11 @@ export default function ProjectDetail() {
                   label="解題思路"
                   title="我是怎麼做的"
                 >
-                  <ol className="flex flex-col gap-6">
+                  <ol className="flex flex-col gap-6 pl-1">
                     {p.approach.map((a, i) => (
                       <li
                         key={i}
-                        className="relative pl-10 border-l-2 border-rule"
+                        className="relative pl-7 sm:pl-10 border-l-2 border-rule"
                       >
                         <span
                           className={`absolute left-[-13px] top-0 w-6 h-6 rounded-full bg-paper border border-rule flex items-center justify-center text-[10px] font-mono text-${p.accent}`}
@@ -295,7 +297,7 @@ export default function ProjectDetail() {
 
         {/* Gallery */}
         <section className="bg-paper-warm/40 border-y border-rule">
-          <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-16 lg:py-24">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-12 py-14 sm:py-16 lg:py-24">
             <div className="flex items-center gap-3 mb-10">
               <span className="marker-num">GALLERY · 作品畫面</span>
               <span className="flex-1 h-px bg-rule" />
@@ -339,7 +341,7 @@ export default function ProjectDetail() {
         </section>
 
         {/* Prev / Next */}
-        <section className="mx-auto max-w-[1400px] px-6 lg:px-12 py-16 lg:py-24">
+        <section className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-12 py-14 sm:py-16 lg:py-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
             <ProjectNav direction="prev" p={prev} />
             <ProjectNav direction="next" p={next} />

@@ -2,11 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import ProjectDetail from './pages/ProjectDetail'
 import ScrollManager from './components/ScrollManager'
+import SplashIntro from './components/SplashIntro'
 
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollManager />
+      <SplashIntro />
       <div className="min-h-screen bg-paper text-ink grain-overlay">
         <Routes>
           <Route path="/" element={<Home />} />

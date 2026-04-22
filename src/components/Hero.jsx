@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDownRight, Sparkles } from "lucide-react";
 
 const fadeUp = {
@@ -11,12 +12,19 @@ const fadeUp = {
 };
 
 export default function Hero() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
   return (
     <section
+      ref={ref}
       id="home"
-      className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden"
+      className="relative pt-10 pb-24 lg:pt-16 lg:pb-32 overflow-hidden"
     >
-      <FloatingShapes />
+      <FloatingShapes progress={scrollYProgress} />
 
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
         {/* Top meta bar */}
@@ -62,28 +70,24 @@ export default function Hero() {
               initial="hidden"
               animate="show"
               custom={2}
-              className="font-serif font-black text-ink leading-[0.95] tracking-tightest text-balance text-[13vw] sm:text-[10vw] lg:text-[7.4vw] xl:text-[112px]"
+              className="font-serif font-bold text-ink leading-[1.05] tracking-tight text-balance text-[12vw] sm:text-[9vw] lg:text-[6.8vw] xl:text-[104px]"
             >
               用
               <span className="relative inline-block mx-1">
                 <span className="relative z-10">服務設計</span>
                 <span className="absolute inset-x-0 bottom-1 h-[18%] bg-g-blue/30 rounded-sm -z-0" />
               </span>
-              與
-              <span className="relative inline-block mx-1">
-                <span className="relative z-10">商業分析</span>
-                <span className="absolute inset-x-0 bottom-1 h-[18%] bg-g-yellow/40 rounded-sm -z-0" />
-              </span>
+              與商業分析
               <br />
               推動
-              <span className="relative inline-block mx-2 font-display italic font-semibold">
+              <span className="relative inline-block mx-1">
                 <span className="relative z-10">AI&nbsp;Transition</span>
                 <span className="absolute inset-x-0 bottom-1 h-[18%] bg-g-green/30 rounded-sm -z-0" />
               </span>
               的
               <br />
               Product Manager
-              <span className="inline-block w-3 h-3 ml-2 mb-3 align-baseline bg-g-red rounded-sm" />
+              <span className="inline-block w-2.5 h-2.5 ml-2 mb-2 align-baseline bg-g-red rounded-sm" />
             </motion.h1>
           </div>
 
@@ -156,7 +160,14 @@ function Stat({ k, label, color }) {
   );
 }
 
-function FloatingShapes() {
+function FloatingShapes({ progress }) {
+  const yBlue = useTransform(progress, [0, 1], [0, -140]);
+  const yYellow = useTransform(progress, [0, 1], [0, -220]);
+  const yRed = useTransform(progress, [0, 1], [0, -80]);
+  const yKanji = useTransform(progress, [0, 1], [0, 180]);
+  const rotateYellow = useTransform(progress, [0, 1], [0, 24]);
+  const opacityShapes = useTransform(progress, [0, 0.7, 1], [1, 0.6, 0]);
+
   return (
     <div
       aria-hidden
@@ -166,24 +177,28 @@ function FloatingShapes() {
         initial={{ scale: 0, rotate: -30 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        style={{ y: yBlue, opacity: opacityShapes }}
         className="absolute top-[12%] right-[6%] w-28 h-28 lg:w-44 lg:h-44 rounded-full bg-g-blue/10 border-2 border-g-blue/25"
       />
       <motion.div
         initial={{ scale: 0, rotate: 30 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+        style={{ y: yYellow, rotate: rotateYellow, opacity: opacityShapes }}
         className="absolute top-[28%] right-[22%] w-10 h-10 lg:w-16 lg:h-16 bg-g-yellow rounded-sm"
       />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+        style={{ y: yRed, opacity: opacityShapes }}
         className="absolute bottom-[18%] right-[14%] w-20 h-20 lg:w-32 lg:h-32 rounded-full bg-g-red/15"
       />
       <motion.svg
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
         transition={{ duration: 2, ease: "easeInOut", delay: 0.4 }}
+        style={{ opacity: opacityShapes }}
         className="absolute top-[8%] left-[48%] w-36 h-36 lg:w-52 lg:h-52"
         viewBox="0 0 100 100"
         fill="none"
@@ -199,9 +214,12 @@ function FloatingShapes() {
         />
       </motion.svg>
       {/* background grid character */}
-      <div className="absolute -right-10 bottom-0 lg:right-0 lg:bottom-[-8%] font-serif text-ink/[0.03] leading-none select-none pointer-events-none text-[38vw] lg:text-[28vw] font-black">
+      <motion.div
+        style={{ y: yKanji }}
+        className="absolute -right-10 bottom-0 lg:right-0 lg:bottom-[-8%] font-serif text-ink/[0.03] leading-none select-none pointer-events-none text-[38vw] lg:text-[28vw] font-black"
+      >
         橋
-      </div>
+      </motion.div>
     </div>
   );
 }

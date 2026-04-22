@@ -26,9 +26,9 @@ export default {
         'g-green': '#1E8E3E',
       },
       fontFamily: {
-        display: ['"Fraunces"', '"Noto Serif TC"', 'serif'],
-        serif: ['"Noto Serif TC"', 'Georgia', 'serif'],
-        sans: ['"Noto Sans TC"', 'system-ui', 'sans-serif'],
+        display: ['"Fraunces"', '"GenSenRounded2"', '"Noto Sans TC"', 'sans-serif'],
+        serif: ['"GenSenRounded2"', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
+        sans: ['"GenSenRounded2"', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       letterSpacing: {
