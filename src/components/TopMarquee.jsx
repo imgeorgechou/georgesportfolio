@@ -13,8 +13,8 @@ const dotColors = ['text-g-blue', 'text-g-red', 'text-g-yellow', 'text-g-green']
 
 export default function TopMarquee() {
   return (
-    <div className="bg-ink text-paper overflow-hidden">
-      <div className="flex w-max animate-marquee gap-10 py-2.5 text-[12px] lg:text-[13px] font-medium tracking-[0.14em]">
+    <div className="bg-ink text-paper overflow-hidden" style={{ maxWidth: '100vw' }}>
+      <div className="flex animate-marquee gap-10 py-2.5 text-[12px] lg:text-[13px] font-medium tracking-[0.14em]" style={{ width: 'max-content' }}>
         {Array.from({ length: 2 }).map((_, rep) => (
           <div key={rep} className="flex items-center gap-10 shrink-0">
             {items.map((text, i) => (

@@ -20,11 +20,15 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
   }
   body {
     @apply bg-paper text-ink font-sans antialiased;
     font-feature-settings: "palt", "ss01";
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    max-width: 100%;
   }
   main > section[id] {
     scroll-margin-top: 72px;
