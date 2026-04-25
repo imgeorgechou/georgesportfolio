@@ -2,47 +2,31 @@ import { useEffect, useState } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 
-const items = [
-  { id: 'home', label: '首頁', num: '01' },
-  { id: 'about', label: '關於我', num: '02' },
-  { id: 'portfolio', label: '作品集', num: '03' },
-  { id: 'contact', label: '聯絡', num: '04' },
+const navItems = [
+  { to: '/',              label: '作品集', num: '01', exact: true  },
+  { to: '/about',         label: '關於我', num: '02', exact: false },
+  { to: '/about#contact', label: '聯絡',   num: '03', exact: false },
 ]
 
 const dotColors = ['#1A73E8', '#EA4335', '#F9AB00', '#1E8E3E']
 
 export default function Nav() {
   const { pathname } = useLocation()
-  const isHome = pathname === '/'
-  const [active, setActive] = useState('home')
   const [scrolled, setScrolled] = useState(false)
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 22, mass: 0.3 })
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 24)
-      if (!isHome) return
-      const y = window.scrollY + window.innerHeight * 0.35
-      for (const it of items) {
-        const el = document.getElementById(it.id)
-        if (!el) continue
-        const top = el.offsetTop
-        const bot = top + el.offsetHeight
-        if (y >= top && y < bot) {
-          setActive(it.id)
-          break
-        }
-      }
-    }
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [isHome])
+  }, [])
 
-  const AnchorTag = isHome ? 'a' : Link
-  const toOrHref = (hash) =>
-    isHome ? { href: `#${hash}` } : { to: `/#${hash}` }
+  const isActive = ({ to, exact }) => {
+    const base = to.split('#')[0]
+    return exact ? pathname === base : pathname === base
+  }
 
   return (
     <motion.header
@@ -50,12 +34,11 @@ export default function Nav() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`sticky top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled || !isHome
-          ? 'backdrop-blur-md bg-paper/85 border-b border-rule'
-          : 'bg-paper'
+        scrolled ? 'backdrop-blur-md bg-paper/85 border-b border-rule' : 'bg-paper'
       }`}
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12 h-16 flex items-center justify-between">
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group cursor-pointer">
           <span className="grid grid-cols-2 gap-[3px]">
             {dotColors.map((c, i) => (
@@ -69,29 +52,26 @@ export default function Nav() {
           <span className="font-display text-[17px] font-semibold tracking-tight">
             周致祥
           </span>
-          <span className="marker-num hidden sm:inline ml-2">
-            GEORGE · 久居
-          </span>
+          <span className="marker-num hidden sm:inline ml-2">GEORGE · 久居</span>
         </Link>
 
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
-          {items.map((it, i) => (
-            <AnchorTag
-              key={it.id}
-              {...toOrHref(it.id)}
+          {navItems.map((it, i) => (
+            <Link
+              key={it.to}
+              to={it.to}
               className="relative px-4 py-2 text-sm cursor-pointer group"
             >
               <span className="marker-num mr-2 opacity-60">{it.num}</span>
               <span
                 className={`transition-colors duration-300 ${
-                  isHome && active === it.id
-                    ? 'text-ink'
-                    : 'text-ink-soft group-hover:text-ink'
+                  isActive(it) ? 'text-ink' : 'text-ink-soft group-hover:text-ink'
                 }`}
               >
                 {it.label}
               </span>
-              {isHome && active === it.id && (
+              {isActive(it) && (
                 <motion.span
                   layoutId="nav-underline"
                   className="absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full"
@@ -99,25 +79,29 @@ export default function Nav() {
                   transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                 />
               )}
-            </AnchorTag>
+            </Link>
           ))}
         </nav>
 
-        <AnchorTag
-          {...toOrHref('contact')}
+        {/* CTA */}
+        <Link
+          to="/about#contact"
           className="hidden md:inline-flex items-center gap-2 bg-ink text-paper px-4 py-2 rounded-full text-sm hover:bg-g-blue transition-colors duration-300 cursor-pointer"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-g-green animate-pulse" />
           開啟對話
-        </AnchorTag>
+        </Link>
 
-        <AnchorTag
-          {...toOrHref('portfolio')}
+        {/* Mobile shortcut */}
+        <Link
+          to="/about"
           className="md:hidden text-sm font-medium cursor-pointer hover-underline"
         >
-          作品集 →
-        </AnchorTag>
+          關於我 →
+        </Link>
       </div>
+
+      {/* Scroll progress bar */}
       <motion.div
         style={{ scaleX: progress }}
         className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-gradient-to-r from-g-blue via-g-yellow to-g-red"
