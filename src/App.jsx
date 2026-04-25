@@ -12,8 +12,8 @@ export default function App() {
       <SplashIntro />
       <div className="min-h-screen bg-paper text-ink grain-overlay">
         <Routes>
-          <Route path="/" element={<Works />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/" element={<AboutPage />} />
+          <Route path="/works" element={<Works />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

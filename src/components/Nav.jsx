@@ -3,9 +3,9 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 
 const navItems = [
-  { to: '/',              label: '作品集', num: '01', exact: true  },
-  { to: '/about',         label: '關於我', num: '02', exact: false },
-  { to: '/about#contact', label: '聯絡',   num: '03', exact: false },
+  { to: '/',       label: '關於我', num: '01', exact: true  },
+  { to: '/works',  label: '作品集', num: '02', exact: false },
+  { to: '/#contact', label: '聯絡', num: '03', exact: false },
 ]
 
 const dotColors = ['#1A73E8', '#EA4335', '#F9AB00', '#1E8E3E']
@@ -85,7 +85,7 @@ export default function Nav() {
 
         {/* CTA */}
         <Link
-          to="/about#contact"
+          to="/#contact"
           className="hidden md:inline-flex items-center gap-2 bg-ink text-paper px-4 py-2 rounded-full text-sm hover:bg-g-blue transition-colors duration-300 cursor-pointer"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-g-green animate-pulse" />
@@ -94,10 +94,10 @@ export default function Nav() {
 
         {/* Mobile shortcut */}
         <Link
-          to="/about"
+          to="/works"
           className="md:hidden text-sm font-medium cursor-pointer hover-underline"
         >
-          關於我 →
+          作品集 →
         </Link>
       </div>
 
