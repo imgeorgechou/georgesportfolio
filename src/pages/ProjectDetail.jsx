@@ -59,7 +59,7 @@ export default function ProjectDetail() {
             className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm"
           >
             <Link
-              to="/#portfolio"
+              to="/works"
               className="inline-flex items-center gap-1.5 text-ink-soft hover:text-ink transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" strokeWidth={1.8} />
@@ -80,7 +80,7 @@ export default function ProjectDetail() {
               initial="hidden"
               animate="show"
               custom={1}
-              className="col-span-12 lg:col-span-8"
+              className="col-span-12 lg:col-span-8 min-w-0"
             >
               <div className="flex flex-wrap items-center gap-2 mb-6">
                 <span
@@ -90,11 +90,11 @@ export default function ProjectDetail() {
                 </span>
                 <span className="marker-num">{p.role}</span>
               </div>
-              <h1 className="font-serif font-black text-[2rem] leading-[1.1] sm:text-5xl sm:leading-[1.05] lg:text-6xl tracking-tightest text-balance break-words">
+              <h1 className="font-serif font-black text-[2rem] leading-[1.1] sm:text-5xl sm:leading-[1.05] lg:text-6xl tracking-tightest text-balance break-words overflow-hidden">
                 {p.title}
               </h1>
               {p.summary && (
-                <p className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-ink-soft leading-relaxed text-pretty max-w-2xl">
+                <p className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-ink-soft leading-relaxed text-pretty max-w-2xl break-words">
                   {p.summary}
                 </p>
               )}
@@ -105,7 +105,7 @@ export default function ProjectDetail() {
               initial="hidden"
               animate="show"
               custom={2}
-              className="col-span-12 lg:col-span-4"
+              className="col-span-12 lg:col-span-4 min-w-0"
             >
               <div className="rounded-2xl border border-rule bg-paper p-5 sm:p-6 lg:p-7">
                 <MetaRow label="年份" value={p.year} />
@@ -165,7 +165,7 @@ export default function ProjectDetail() {
         <section className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-12 py-14 sm:py-16 lg:py-24">
           <div className="grid grid-cols-12 gap-10 lg:gap-16">
             {/* Left: narrative */}
-            <div className="col-span-12 lg:col-span-8 flex flex-col gap-12 sm:gap-14 lg:gap-20">
+            <div className="col-span-12 lg:col-span-8 flex flex-col gap-12 sm:gap-14 lg:gap-20 min-w-0 overflow-hidden">
               {/* Problem */}
               <Block
                 accent={p.accent}
@@ -173,11 +173,11 @@ export default function ProjectDetail() {
                 label="解決的問題"
                 title="為什麼做這個專案"
               >
-                <p className="text-ink-soft leading-relaxed text-pretty text-lg">
+                <p className="text-ink-soft leading-relaxed text-pretty text-lg break-words">
                   {p.problem}
                 </p>
                 {p.background && (
-                  <p className="mt-4 text-ink-soft leading-relaxed text-pretty">
+                  <p className="mt-4 text-ink-soft leading-relaxed text-pretty break-words">
                     {p.background}
                   </p>
                 )}
@@ -203,11 +203,11 @@ export default function ProjectDetail() {
                           {String(i + 1).padStart(2, '0')}
                         </span>
                         {a.title && (
-                          <h4 className="font-serif text-lg font-semibold mb-1.5">
+                          <h4 className="font-serif text-lg font-semibold mb-1.5 break-words">
                             {a.title}
                           </h4>
                         )}
-                        <p className="text-ink-soft leading-relaxed text-pretty">
+                        <p className="text-ink-soft leading-relaxed text-pretty break-words">
                           {a.body}
                         </p>
                       </li>
@@ -227,12 +227,12 @@ export default function ProjectDetail() {
                   {p.impact.map((it, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-3 text-ink text-lg leading-snug"
+                      className="flex items-start gap-3 text-ink text-lg leading-snug min-w-0"
                     >
                       <span
                         className={`mt-[11px] w-1.5 h-1.5 rounded-full bg-${p.accent} shrink-0`}
                       />
-                      <span>{it}</span>
+                      <span className="break-words min-w-0">{it}</span>
                     </li>
                   ))}
                 </ul>
@@ -246,7 +246,7 @@ export default function ProjectDetail() {
                   label="反思"
                   title="我從中學到什麼"
                 >
-                  <p className="text-ink-soft leading-relaxed text-pretty text-lg">
+                  <p className="text-ink-soft leading-relaxed text-pretty text-lg break-words">
                     {p.outcome}
                   </p>
                 </Block>
@@ -261,7 +261,7 @@ export default function ProjectDetail() {
                     label={`延伸 ${String(i + 1).padStart(2, '0')}`}
                     title={s.heading}
                   >
-                    <p className="text-ink-soft leading-relaxed text-pretty whitespace-pre-line">
+                    <p className="text-ink-soft leading-relaxed text-pretty whitespace-pre-line break-words">
                       {s.body}
                     </p>
                   </Block>
@@ -269,7 +269,7 @@ export default function ProjectDetail() {
             </div>
 
             {/* Right: sticky stack */}
-            <aside className="col-span-12 lg:col-span-4">
+            <aside className="col-span-12 lg:col-span-4 min-w-0">
               <div className="lg:sticky lg:top-28 flex flex-col gap-6">
                 <div>
                   <p className="marker-num mb-3">使用技術</p>
@@ -370,7 +370,7 @@ function Block({ accent, icon, label, title, children }) {
         <span className="marker-num">{label}</span>
       </div>
       {title && (
-        <h3 className="font-serif text-2xl lg:text-3xl font-bold leading-snug mb-5 text-balance">
+        <h3 className="font-serif text-2xl lg:text-3xl font-bold leading-snug mb-5 text-balance break-words">
           {title}
         </h3>
       )}
